@@ -1,12 +1,17 @@
 import React from 'react'
-
+//https://blog.csdn.net/weixin_44093239/article/details/95937437
+// npm install -g cnpm --registry=https://registry.npm.taobao.org
+//npm install --save core-js@^3
 import {HashRouter,Route,Link} from 'react-router-dom'
 
 import ReactTypes from 'prop-types'
 
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+// 导入需要的 Ant Design 组件
+import { Layout, Menu } from 'antd';
+const { Header, Content, Footer } = Layout;
+
+// 导入模块化的样式
+import styles from './css/app.scss'
 
 import Home from './components/Home.jsx'
 import Movie from './components/Movie.jsx'
@@ -35,110 +40,44 @@ componentDidUpdate(preProps,preState){}
 componentWillReceiveProps(nextProps){}
     render(){
       return  <HashRouter>
-          <div>
-     
-  
+            <Layout className="layout" style={{ height: '100%' }}>
 
-   <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        style={{ lineHeight: '64px' }}
-      >
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Layout>
-      <Sider width={200} style={{ background: '#fff' }}>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="user" />
-                subnav 1
-              </span>
-            }
+        {/* Header 头部区域 */}
+        <Header>
+          <div className={styles.logo} />
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={[window.location.hash.split('/')[1]]}
+            style={{ lineHeight: '64px' }}
           >
-            <Menu.Item key="1">option1</Menu.Item>
-            <Menu.Item key="2">option2</Menu.Item>
-            <Menu.Item key="3">option3</Menu.Item>
-            <Menu.Item key="4">option4</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <Icon type="laptop" />
-                subnav 2
-              </span>
-            }
-          >
-            <Menu.Item key="5">option5</Menu.Item>
-            <Menu.Item key="6">option6</Menu.Item>
-            <Menu.Item key="7">option7</Menu.Item>
-            <Menu.Item key="8">option8</Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub3"
-            title={
-              <span>
-                <Icon type="notification" />
-                subnav 3
-              </span>
-            }
-          >
-            <Menu.Item key="9">option9</Menu.Item>
-            <Menu.Item key="10">option10</Menu.Item>
-            <Menu.Item key="11">option11</Menu.Item>
-            <Menu.Item key="12">option12</Menu.Item>
-          </SubMenu>
-        </Menu>
-      </Sider>
-      <Layout style={{ padding: '0 24px 24px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <Content
-          style={{
-            background: '#fff',
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}
-        >
-          Content
+            <Menu.Item key="home">
+              <Link to="/home">首页</Link>
+            </Menu.Item>
+            <Menu.Item key="movie">
+              <Link to="/movie/in_theaters/1">电影</Link>
+            </Menu.Item>
+            <Menu.Item key="about">
+              <Link to="/about">关于</Link>
+            </Menu.Item>
+          </Menu>
+        </Header>
+
+        {/* 中间的 内容区域 */}
+        <Content style={{ backgroundColor: '#fff', flex: 1 }}>
+          <Route path="/home" component={Home}></Route>
+          <Route path="/movie" component={Movie}></Route>
+          <Route path="/about" component={About}></Route>
         </Content>
+
+        {/* Footer 底部区域 */}
+        <Footer style={{ textAlign: 'center' }}>
+          传智播客 ©2017 黑马程序员
+        </Footer>
+
+
       </Layout>
-    </Layout>
-  </Layout>,
-  mountNode
-      <hr/>
-
-        <Link to='/home'>home</Link>&nbsp;&nbsp;
-        <Link to='/movie'>movie</Link>&nbsp;&nbsp;
-        <Link to='/about'>about</Link>
-
-
-
-<Route path="/home" component={Home}></Route>
-<Route path='/movie' component={Movie}></Route>
-<Route path='/about' component={About}></Route>
-     
-      </div>
-       </HashRouter>
+    </HashRouter>
     }
 
 
